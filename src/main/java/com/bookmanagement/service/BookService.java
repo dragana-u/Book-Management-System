@@ -26,4 +26,7 @@ public class BookService {
     public Book findById(Long id){
         return bookRepository.findById(id).get();
     }
+    public List<Book> findByAuthor(String author){
+        return bookRepository.findAllByAuthor(author);
+    }
 }

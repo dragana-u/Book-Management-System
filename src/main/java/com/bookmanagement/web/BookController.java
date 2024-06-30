@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -38,8 +39,13 @@ public class BookController {
     }
 
     @GetMapping("/available_books")
-    public String availableBooks(Model model) {
-        List<Book> books = bookService.getAllBooks();
+    public String availableBooks(Model model, @RequestParam(name = "author", required = false) String author) {
+        List<Book> books;
+        if(author!=null && !author.isEmpty()){
+            books = bookRepository.findAllByAuthor(author);
+        }else{
+           books = bookRepository.findAll();
+        }
         model.addAttribute("books", books);
         return "available_books";
     }
@@ -82,4 +88,5 @@ public class BookController {
         bookService.save(book);
         return "redirect:/available_books";
     }
+
 }

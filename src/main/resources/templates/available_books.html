@@ -52,6 +52,11 @@
         </tr>
         </thead>
         <tbody>
+        <form th:action="@{/available_books}" th:method="GET">
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author">
+            <button type="submit">Filter</button>
+        </form>
         <tr th:each="book : ${books}">
             <td th:text="${book.title}"></td>
             <td th:text="${book.author}"></td>
