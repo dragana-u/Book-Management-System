@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,9 +25,9 @@
                     <a class="nav-link text-white" href="my_books">My Books</a>
                 </li>
             </ul>
-            <div>
-                <a class="nav-link text-white" href="book_register">New Book Register</a>
-            </div>
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="nav-link text-white" href="book_register" style="border:1px solid white" >New Book Register</a>
+            </th:block>
         </div>
     </div>
 </nav>

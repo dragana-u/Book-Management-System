@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +11,7 @@
         }
         .action-buttons {
             display: flex;
-            gap: 10px; /* Adjust the gap between buttons as needed */
+            gap: 10px;
         }
     </style>
     <title>Book store</title>
@@ -35,9 +35,9 @@
                     <a class="nav-link text-white" href="my_books">My Books</a>
                 </li>
             </ul>
-            <div>
-                <a class="nav-link text-white" href="book_register">New Book Register</a>
-            </div>
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="nav-link text-white" href="book_register" style="border:1px solid white" >New Book Register</a>
+            </th:block>
         </div>
     </div>
 </nav>
@@ -60,8 +60,8 @@
                 <form th:action="@{/saveMyBook/{id}(id=${book.id})}" th:method="POST">
                     <button class="btn btn-secondary btn-sm" type="submit">Add to MyBooks</button>
                 </form>
-                <form th:action="@{/edit/{id}(id=${book.id})}" th:method="get">
-                    <button class="btn btn-secondary btn-sm edit-button" type="submit">Edit</button>
+                <form  sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{/edit/{id}(id=${book.id})} " th:method="get">
+                    <button  class="btn btn-secondary btn-sm edit-button" type="submit">Edit</button>
                 </form>
             </td>
         </tr>
