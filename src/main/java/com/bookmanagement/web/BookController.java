@@ -53,9 +53,9 @@ public class BookController {
         return "redirect:/available_books";
     }
 
-    @PostMapping("/saveMyBook/{id}")
-    public String saveMyBook(@PathVariable Long id) {
-        myBookService.addToMyBook(id);
+    @PostMapping("/saveMyBook/{idBook}")
+    public String saveMyBook(@PathVariable Long idBook) {
+        myBookService.addToMyBook(idBook);
         return "redirect:/my_books";
     }
 

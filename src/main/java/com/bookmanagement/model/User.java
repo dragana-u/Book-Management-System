@@ -25,6 +25,8 @@ public class User implements UserDetails {
     private boolean isAccountNonLocked = true;
     private boolean isCredentialsNonExpired =  true;
     private boolean isEnabled = true;
+    @OneToMany(mappedBy = "user")
+    private List<MyBooks> myBooks;
 
     public User(String username, String password, String email, Role role) {
         this.username = username;
